@@ -1,5 +1,6 @@
 import random
 import tqdm
+import sys
 
 class Individual:
 	def __init__(self, individual=None):
@@ -109,11 +110,22 @@ class KnapSack:
 if __name__=='__main__':
 	weights=[]
 	profits=[]
-	with open("profits.txt", "r") as f:
-		weights=list(int(x) for x in f.readlines())
-	with open("weights.txt", "r") as f:
-		profits=(list(int(x) for x in f.readlines()))
-	weight_W=6404180
+	weight_W=0
+	if(len(sys.argv)>1 and sys.argv[1]=="F"):
+		with open("profits.txt", "r") as f:
+			weights=list(int(x) for x in f.readlines())
+		with open("weights.txt", "r") as f:
+			profits=(list(int(x) for x in f.readlines()))
+		weight_W=6404180
+	else:
+		print("Enter the number of items")
+		n=int(input())
+		print("Enter the weights")
+		weights=[int(x) for x in input().split()]
+		print("Enter the profits")
+		profits=[int(x) for x in input().split()]
+		print("Enter the capacity of the knapsack")
+		weight_W=int(input())
 	pw=p_w(weights, profits, weight_W)
 	ks=KnapSack()
 	ks.create_population()
